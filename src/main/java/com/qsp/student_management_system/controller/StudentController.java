@@ -30,7 +30,7 @@ public class StudentController {
 
 	
 	@PostMapping("/save")
-	public Student saveEmployee(@RequestBody Student student) {
+	public Student saveStudent(@RequestBody Student student) {
 		return service.saveStudent(student); 
 	}
 	
@@ -38,10 +38,10 @@ public class StudentController {
 	public List<Student> saveStudents(@RequestBody List<Student> list) {
 		return service.saveStudents(list);  
  
-	}
+	} 
 	
 	@GetMapping("/login")
-	public String loginEmployee(@RequestParam String userName, @RequestParam String password) {
+	public String loginStudent(@RequestParam String userName, @RequestParam String password) {
 		  return service.getStudent(userName,password); 
 		 	} 
 	
@@ -49,9 +49,9 @@ public class StudentController {
 	//****************************************   FOR UPDATE  *************************************************************
 	
 		 @PutMapping("/update")
-		    public Student updateStdent(@RequestParam int id, @RequestBody Student student
+		    public Student updateStudent(@RequestParam int id, @RequestBody Student student
 		    		) {
-		        return service.updateEmployee(id, student);
+		        return service.updateStudent(id, student);
 		    } 
 		 
 		 @PutMapping("/update/phone")
@@ -75,13 +75,18 @@ public class StudentController {
 		        return service.updateStudentPassword(id, password);
 		    }
 		  
+		  @PutMapping("/update/securedmarks")
+		  public Student updatedSecuredMakrs(@RequestParam int id ,@RequestParam int securedMarks, Student student) {
+			  return service.updateStudentSecuredMarks(id, securedMarks, student);
+		  }
+		   
 		  
 		//****************************************   FOR FETCH  *************************************************************
 
 		  
 		  @GetMapping("/fetch")
 		    public Optional<Student> fetch(@RequestParam int id) { 
-		        return service.findStudentById(id);
+		        return service.findStudentById(id); 
 		    }
 		  
 		  @GetMapping("/fetch/name") 

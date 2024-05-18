@@ -71,13 +71,13 @@ public class StudentDao {
 		//****************************************   FOR UPDATE  *************************************************************
 
 
-		public Student updateEmployee(int id, Student updatedStudent) {
+		public Student updateStudent(int id, Student updatedStudent) {
 	        Optional<Student> optional = repo.findById(id);
 	        if (optional.isPresent()) { 
 	            updatedStudent.setId(id);
 	            return repo.save(updatedStudent);
 	        } else { 
-	            return null; // Or you can throw an exception indicating that the employee with the given ID was not found
+	            return null; // Or you can throw an exception indicating that the student with the given ID was not found
 	        }
 	    }
 		
@@ -127,6 +127,17 @@ public class StudentDao {
 		            return null;  
 		        }
 		    }
+		 
+		 public Student updateStudentSecuredMarks(int id , int securedMarks, Student student) {
+			 Optional<Student> optional= repo.findById(id);
+			 if(optional.isPresent()) {
+				 Student student1= optional.get();
+				 student1.setSecuredMarks(securedMarks);
+			 } else {
+				 return null; 
+			 }
+			return student;  
+			}
 		 
 		 
 		 
@@ -235,7 +246,7 @@ public class StudentDao {
 				 repo.deleteAll();
 				 return "Deleted Sccessfully";
 			 } else {
-				 return "Student with grade " + grade + " not found";
+				 return "Student with grade " + grade + " not found"; 
 			 }
 		 }
 		

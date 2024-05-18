@@ -78,8 +78,8 @@ public List<Student> saveStudents( List<Student> list) {
 //****************************************   FOR UPDATE  *************************************************************
 
 	
-    public Student updateEmployee( int id,  Student student) {
-        return dao.updateEmployee(id, student);
+    public Student updateStudent( int id,  Student student) {
+        return dao.updateStudent(id, student);
     } 
     
     public Student updateStudentPhone( int id,  long phone) {
@@ -98,6 +98,29 @@ public List<Student> saveStudents( List<Student> list) {
  
     public Student updateStudentPassword( int id,  String password) {
         return dao.updateStudentPassword(id, password); 
+    }
+    
+    public Student updateStudentSecuredMarks(int id, int securedMarks, Student student) {
+    	 
+    	
+    	double totalMarks=student.getTotalMarks();
+    	double securedMarks1=student.getSecuredMarks();
+    	if(securedMarks1<=totalMarks) {
+    		double percentage= (securedMarks1/totalMarks)*100; 
+    		student.setPercentage(percentage);		
+    		if(percentage>85) { 
+    			student.setGrade("Distinction");
+    		} else if (percentage>=70&& percentage<85) {
+    			student.setGrade("First Class");
+    		} else if (percentage>=49&& percentage<70) {
+    			student.setGrade("First Class");
+    		} else if (percentage>=35&& percentage<49) {
+    			student.setGrade("Pass");
+    		} else {
+    			student.setGrade("Fail");
+    		}
+    	}
+    	return dao.updateStudentSecuredMarks(id, (int) securedMarks1,student);  
     }
     
 //****************************************   FOR FETCH  *************************************************************
